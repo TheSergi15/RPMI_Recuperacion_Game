@@ -1,127 +1,73 @@
 fileFormatVersion: 2
-guid: 20ce2fecf32ffe444a07a28e72bfe0b2
+guid: 8d2caea057946ae4597c61a8e57c29a2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4142276880962872504
-    second: Player_Jump_0
+      213: -1193118917850865341
+    second: Player_Fall_0
   - first:
-      213: -2833288000470796695
-    second: Player_Jump_1
+      213: 3231906144451490875
+    second: Player_Fall_1
   - first:
-      213: -560937678416875687
-    second: Player_Jump_2
+      213: -4894582833811548398
+    second: Player_Fall_2
   - first:
-      213: -1627450272019776505
-    second: Player_Jump_3
+      213: -1973582045016827254
+    second: Player_Fall_3
   - first:
-      213: -6684733232908654282
-    second: Player_Jump_4
+      213: -2215648299479125745
+    second: Player_Fall_4
   - first:
-      213: -186415178674561052
-    second: Player_Jump_5
+      213: -5006888766522083146
+    second: Player_Fall_5
   - first:
-      213: -4657594874730478759
-    second: Player_Jump_6
+      213: -8256339707740044310
+    second: Player_Fall_6
   - first:
-      213: -6449261802505695524
-    second: Player_Jump_7
+      213: 2825918282300691779
+    second: Player_Fall_7
   - first:
-      213: -8712537506018747961
-    second: Player_Jump_8
+      213: 4490726200472448930
+    second: Player_Fall_8
   - first:
-      213: -643346927723006273
-    second: Player_Jump_9
+      213: -4578794492605664974
+    second: Player_Fall_9
   - first:
-      213: 8634783765964253897
-    second: Player_Jump_10
+      213: -4521407557518974180
+    second: Player_Fall_10
   - first:
-      213: -4138356294339237655
-    second: Player_Jump_11
+      213: 4395667785188591365
+    second: Player_Fall_11
   - first:
-      213: 7289856222339704521
-    second: Player_Jump_12
+      213: -3868602726377571598
+    second: Player_Fall_12
   - first:
-      213: 6883361050903544313
-    second: Player_Jump_13
+      213: 3361708893540329938
+    second: Player_Fall_13
   - first:
-      213: 3717352709013303382
-    second: Player_Jump_14
+      213: 7912775581842697550
+    second: Player_Fall_14
   - first:
-      213: 1610109293857967783
-    second: Player_Jump_15
+      213: -8354134118528334246
+    second: Player_Fall_15
   - first:
-      213: 2553764814642633825
-    second: Player_Jump_16
+      213: 8529938424692678182
+    second: Player_Fall_16
   - first:
-      213: 7835760160529353851
-    second: Player_Jump_17
+      213: 1415160018602470987
+    second: Player_Fall_17
   - first:
-      213: 792657932659712732
-    second: Player_Jump_18
+      213: 5722140159080639120
+    second: Player_Fall_18
   - first:
-      213: -2657996650245872116
-    second: Player_Jump_19
+      213: 5320487933093321756
+    second: Player_Fall_19
   - first:
-      213: 9023941242669004919
-    second: Player_Jump_20
+      213: -5996357957567516525
+    second: Player_Fall_20
   - first:
-      213: -6785943448332924495
-    second: Player_Jump_21
-  - first:
-      213: -6579205149581076055
-    second: Player_Jump_22
-  - first:
-      213: 5084479251113143713
-    second: Player_Jump_23
-  - first:
-      213: 7524704485756996440
-    second: Player_Jump_24
-  - first:
-      213: -1953109012564697226
-    second: Player_Jump_25
-  - first:
-      213: 7698047247989027008
-    second: Player_Jump_26
-  - first:
-      213: -608105438992875602
-    second: Player_Jump_27
-  - first:
-      213: -1957469912716779672
-    second: Player_Jump_28
-  - first:
-      213: -3651219244601614498
-    second: Player_Jump_29
-  - first:
-      213: -1271432538555908204
-    second: Player_Jump_30
-  - first:
-      213: 7996052900978197993
-    second: Player_Jump_31
-  - first:
-      213: -7445026627898460218
-    second: Player_Jump_32
-  - first:
-      213: -71152414437101468
-    second: Player_Jump_33
-  - first:
-      213: -3407984089206365857
-    second: Player_Jump_34
-  - first:
-      213: 1632923803194498484
-    second: Player_Jump_35
-  - first:
-      213: 8918559219237111213
-    second: Player_Jump_36
-  - first:
-      213: -7438229580266401878
-    second: Player_Jump_37
-  - first:
-      213: 6981653553601718605
-    second: Player_Jump_38
-  - first:
-      213: 5896611748729018853
-    second: Player_Jump_39
+      213: 8671779516729005342
+    second: Player_Fall_21
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -217,7 +163,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Jump_0
+      name: Player_Fall_0
       rect:
         serializedVersion: 2
         x: 0
@@ -232,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 84b15ec9f1da386c0800000000000000
-      internalID: -4142276880962872504
+      spriteID: 34163b66aa0317fe0800000000000000
+      internalID: -1193118917850865341
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_1
+      name: Player_Fall_1
       rect:
         serializedVersion: 2
         x: 4000
@@ -254,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 966bf8133932ea8d0800000000000000
-      internalID: -2833288000470796695
+      spriteID: b34fe67d3890adc20800000000000000
+      internalID: 3231906144451490875
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_2
+      name: Player_Fall_2
       rect:
         serializedVersion: 2
         x: 8000
@@ -276,14 +222,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 95f64d847262738f0800000000000000
-      internalID: -560937678416875687
+      spriteID: 21710f268d2f21cb0800000000000000
+      internalID: -4894582833811548398
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_3
+      name: Player_Fall_3
       rect:
         serializedVersion: 2
         x: 0
@@ -298,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 70cf5a6a9922a69e0800000000000000
-      internalID: -1627450272019776505
+      spriteID: a8adea7269d6c94e0800000000000000
+      internalID: -1973582045016827254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_4
+      name: Player_Fall_4
       rect:
         serializedVersion: 2
         x: 4000
@@ -320,14 +266,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6392b3aba8e0b33a0800000000000000
-      internalID: -6684733232908654282
+      spriteID: f0139525c9f6041e0800000000000000
+      internalID: -2215648299479125745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_5
+      name: Player_Fall_5
       rect:
         serializedVersion: 2
         x: 8000
@@ -342,14 +288,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4ef9c56f168b96df0800000000000000
-      internalID: -186415178674561052
+      spriteID: 6b8be89c135f38ab0800000000000000
+      internalID: -5006888766522083146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_6
+      name: Player_Fall_6
       rect:
         serializedVersion: 2
         x: 0
@@ -364,14 +310,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 95382007326ec5fb0800000000000000
-      internalID: -4657594874730478759
+      spriteID: ae3c33f97c69b6d80800000000000000
+      internalID: -8256339707740044310
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_7
+      name: Player_Fall_7
       rect:
         serializedVersion: 2
         x: 4000
@@ -386,14 +332,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cde072e6f8e9f76a0800000000000000
-      internalID: -6449261802505695524
+      spriteID: 34590d494bda73720800000000000000
+      internalID: 2825918282300691779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_8
+      name: Player_Fall_8
       rect:
         serializedVersion: 2
         x: 8000
@@ -408,8 +354,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7c91c7d9c49d61780800000000000000
-      internalID: -8712537506018747961
+      spriteID: 2af23babfa3425e30800000000000000
+      internalID: 4490726200472448930
       vertices: []
       indices: 
       edges: []
@@ -418,7 +364,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2c7d8a59aabba3e4aa6ddba69d35c358
+    spriteID: a10f5e21c6b165340868ec311675606a
     internalID: 0
     vertices: []
     indices: 
@@ -430,15 +376,15 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":4000.0,"y":4000.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Player_Jump_0: -4142276880962872504
-      Player_Jump_1: -2833288000470796695
-      Player_Jump_2: -560937678416875687
-      Player_Jump_3: -1627450272019776505
-      Player_Jump_4: -6684733232908654282
-      Player_Jump_5: -186415178674561052
-      Player_Jump_6: -4657594874730478759
-      Player_Jump_7: -6449261802505695524
-      Player_Jump_8: -8712537506018747961
+      Player_Fall_0: -1193118917850865341
+      Player_Fall_1: 3231906144451490875
+      Player_Fall_2: -4894582833811548398
+      Player_Fall_3: -1973582045016827254
+      Player_Fall_4: -2215648299479125745
+      Player_Fall_5: -5006888766522083146
+      Player_Fall_6: -8256339707740044310
+      Player_Fall_7: 2825918282300691779
+      Player_Fall_8: 4490726200472448930
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
