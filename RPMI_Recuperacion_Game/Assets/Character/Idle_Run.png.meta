@@ -1,0 +1,713 @@
+fileFormatVersion: 2
+guid: 233832e3626cf9e41997f4685708b7a9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3329004422361037882
+    second: Idle_Run_0
+  - first:
+      213: 8620205023162814769
+    second: Idle_Run_1
+  - first:
+      213: -5322607806059527898
+    second: Idle_Run_2
+  - first:
+      213: 8881133314741288790
+    second: Idle_Run_3
+  - first:
+      213: -3177538460172749954
+    second: Idle_Run_4
+  - first:
+      213: -9089863740807494794
+    second: Idle_Run_5
+  - first:
+      213: 8123319184992881371
+    second: Idle_Run_6
+  - first:
+      213: -5595543071594837157
+    second: Idle_Run_7
+  - first:
+      213: -6239707025253194892
+    second: Idle_Run_8
+  - first:
+      213: 7804833484932801286
+    second: Idle_Run_9
+  - first:
+      213: -4351710642701594137
+    second: Idle_Run_10
+  - first:
+      213: -9191760688102939422
+    second: Idle_Run_11
+  - first:
+      213: -4735160699637797731
+    second: Idle_Run_12
+  - first:
+      213: -3702637737758867590
+    second: Idle_Run_13
+  - first:
+      213: 707982766039660304
+    second: Idle_Run_14
+  - first:
+      213: 4414043043060668531
+    second: Idle_Run_15
+  - first:
+      213: 6820071730217981521
+    second: Idle_Run_16
+  - first:
+      213: 3085458325550170354
+    second: Idle_Run_17
+  - first:
+      213: 5292448542062971711
+    second: Idle_Run_18
+  - first:
+      213: 5633716371678514137
+    second: Idle_Run_19
+  - first:
+      213: -5204099673125295219
+    second: Idle_Run_20
+  - first:
+      213: 5943812950034286299
+    second: Idle_Run_21
+  - first:
+      213: -814601236853505562
+    second: Idle_Run_22
+  - first:
+      213: 6184517575150865194
+    second: Idle_Run_23
+  - first:
+      213: -3651570329875281237
+    second: Idle_Run_24
+  - first:
+      213: 6315880553412478250
+    second: Idle_Run_25
+  - first:
+      213: -2697310911900504253
+    second: Idle_Run_26
+  - first:
+      213: -3134405454832922466
+    second: Idle_Run_27
+  - first:
+      213: 7932238761724620274
+    second: Idle_Run_28
+  - first:
+      213: -4948149243907004021
+    second: Idle_Run_29
+  - first:
+      213: 1541302674066658310
+    second: Idle_Run_30
+  - first:
+      213: 8339908313402573080
+    second: Idle_Run_31
+  - first:
+      213: -5491053252686307580
+    second: Idle_Run_32
+  - first:
+      213: -3793233047569532035
+    second: Idle_Run_33
+  - first:
+      213: 2018900895818103883
+    second: Idle_Run_34
+  - first:
+      213: -4708745294601264860
+    second: Idle_Run_35
+  - first:
+      213: -2108358148407277598
+    second: Idle_Run_36
+  - first:
+      213: -5898261066815302082
+    second: Idle_Run_37
+  - first:
+      213: 3217398358832827384
+    second: Idle_Run_38
+  - first:
+      213: 3338751101395847251
+    second: Idle_Run_39
+  - first:
+      213: 4897138244502446541
+    second: Idle_Run_40
+  - first:
+      213: 3425492982152396135
+    second: Idle_Run_41
+  - first:
+      213: -4997801856506631296
+    second: Idle_Run_42
+  - first:
+      213: -7971680913774727125
+    second: Idle_Run_43
+  - first:
+      213: 69769549877840496
+    second: Idle_Run_44
+  - first:
+      213: 4515080479740357101
+    second: Idle_Run_45
+  - first:
+      213: -271835793305906115
+    second: Idle_Run_46
+  - first:
+      213: 175118082411511677
+    second: Idle_Run_47
+  - first:
+      213: -2105690344732918227
+    second: Idle_Run_48
+  - first:
+      213: 8247048504441703769
+    second: Idle_Run_49
+  - first:
+      213: -6433894643166633384
+    second: Idle_Run_50
+  - first:
+      213: 451937352079366187
+    second: Idle_Run_51
+  - first:
+      213: -4490366920708504424
+    second: Idle_Run_52
+  - first:
+      213: 3212348171247280885
+    second: Idle_Run_53
+  - first:
+      213: 6301655170631068305
+    second: Idle_Run_54
+  - first:
+      213: -1278488084404816227
+    second: Idle_Run_55
+  - first:
+      213: 8049127296429006313
+    second: Idle_Run_56
+  - first:
+      213: 6026218600127665403
+    second: Idle_Run_57
+  - first:
+      213: -6887263341100960731
+    second: Idle_Run_58
+  - first:
+      213: -8344174754743643673
+    second: Idle_Run_59
+  - first:
+      213: 5205983675297266088
+    second: Idle_Run_60
+  - first:
+      213: 863792758820233461
+    second: Idle_Run_61
+  - first:
+      213: -5383278494226037729
+    second: Idle_Run_62
+  - first:
+      213: -4832405340146170523
+    second: Idle_Run_63
+  - first:
+      213: -4041155134788654757
+    second: Idle_Run_64
+  - first:
+      213: 3149117778319729
+    second: Idle_Run_65
+  - first:
+      213: 8909027264213440624
+    second: Idle_Run_66
+  - first:
+      213: -7968736691334802930
+    second: Idle_Run_67
+  - first:
+      213: -160924657609955751
+    second: Idle_Run_68
+  - first:
+      213: -3363945691105706011
+    second: Idle_Run_69
+  - first:
+      213: 34466855487202250
+    second: Idle_Run_70
+  - first:
+      213: 5773254073685706556
+    second: Idle_Run_71
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1024
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Idle_Run_4
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 11999
+        width: 2221
+        height: 3332
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e73f2451b9d17e3d0800000000000000
+      internalID: -3177538460172749954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_5
+      rect:
+        serializedVersion: 2
+        x: 4729
+        y: 11999
+        width: 2221
+        height: 3332
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 673477086115ad180800000000000000
+      internalID: -9089863740807494794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_6
+      rect:
+        serializedVersion: 2
+        x: 8330
+        y: 11999
+        width: 2650
+        height: 3139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdacd9272c3dbb070800000000000000
+      internalID: 8123319184992881371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_8
+      rect:
+        serializedVersion: 2
+        x: 12330
+        y: 11999
+        width: 2650
+        height: 3139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4732649158b1869a0800000000000000
+      internalID: -6239707025253194892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_16
+      rect:
+        serializedVersion: 2
+        x: 8022
+        y: 7999
+        width: 3524
+        height: 3466
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1569356ba13c5ae50800000000000000
+      internalID: 6820071730217981521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_21
+      rect:
+        serializedVersion: 2
+        x: 12022
+        y: 7999
+        width: 3524
+        height: 3466
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd6092ae26aac7250800000000000000
+      internalID: 5943812950034286299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_26
+      rect:
+        serializedVersion: 2
+        x: 1011
+        y: 7999
+        width: 1930
+        height: 3183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34fa26f340a319ad0800000000000000
+      internalID: -2697310911900504253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_28
+      rect:
+        serializedVersion: 2
+        x: 5011
+        y: 7999
+        width: 1930
+        height: 3183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fd2e228029f41e60800000000000000
+      internalID: 7932238761724620274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_38
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 3999
+        width: 2700
+        height: 3577
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fbc727c2ce76ac20800000000000000
+      internalID: 3217398358832827384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_43
+      rect:
+        serializedVersion: 2
+        x: 4846
+        y: 3999
+        width: 2700
+        height: 3577
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2032b7d176ee5190800000000000000
+      internalID: -7971680913774727125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_48
+      rect:
+        serializedVersion: 2
+        x: 8933
+        y: 3999
+        width: 2613
+        height: 3186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2e7933b9c517c2e0800000000000000
+      internalID: -2105690344732918227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_50
+      rect:
+        serializedVersion: 2
+        x: 12933
+        y: 3999
+        width: 2613
+        height: 3186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 852a3c709e636b6a0800000000000000
+      internalID: -6433894643166633384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_62
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 3684
+        height: 3511
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1448a83bb0ca45b0800000000000000
+      internalID: -5383278494226037729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Run_65
+      rect:
+        serializedVersion: 2
+        x: 3999
+        y: 0
+        width: 3685
+        height: 3511
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 179588e1b103b0000800000000000000
+      internalID: 3149117778319729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 749aad242b528734bab45980005fbbe2
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Idle_Run_0: -3329004422361037882
+      Idle_Run_1: 8620205023162814769
+      Idle_Run_10: -4351710642701594137
+      Idle_Run_11: -9191760688102939422
+      Idle_Run_12: -4735160699637797731
+      Idle_Run_13: -3702637737758867590
+      Idle_Run_14: 707982766039660304
+      Idle_Run_15: 4414043043060668531
+      Idle_Run_16: 6820071730217981521
+      Idle_Run_17: 3085458325550170354
+      Idle_Run_18: 5292448542062971711
+      Idle_Run_19: 5633716371678514137
+      Idle_Run_2: -5322607806059527898
+      Idle_Run_20: -5204099673125295219
+      Idle_Run_21: 5943812950034286299
+      Idle_Run_22: -814601236853505562
+      Idle_Run_23: 6184517575150865194
+      Idle_Run_24: -3651570329875281237
+      Idle_Run_25: 6315880553412478250
+      Idle_Run_26: -2697310911900504253
+      Idle_Run_27: -3134405454832922466
+      Idle_Run_28: 7932238761724620274
+      Idle_Run_29: -4948149243907004021
+      Idle_Run_3: 8881133314741288790
+      Idle_Run_30: 1541302674066658310
+      Idle_Run_31: 8339908313402573080
+      Idle_Run_32: -5491053252686307580
+      Idle_Run_33: -3793233047569532035
+      Idle_Run_34: 2018900895818103883
+      Idle_Run_35: -4708745294601264860
+      Idle_Run_36: -2108358148407277598
+      Idle_Run_37: -5898261066815302082
+      Idle_Run_38: 3217398358832827384
+      Idle_Run_39: 3338751101395847251
+      Idle_Run_4: -3177538460172749954
+      Idle_Run_40: 4897138244502446541
+      Idle_Run_41: 3425492982152396135
+      Idle_Run_42: -4997801856506631296
+      Idle_Run_43: -7971680913774727125
+      Idle_Run_44: 69769549877840496
+      Idle_Run_45: 4515080479740357101
+      Idle_Run_46: -271835793305906115
+      Idle_Run_47: 175118082411511677
+      Idle_Run_48: -2105690344732918227
+      Idle_Run_49: 8247048504441703769
+      Idle_Run_5: -9089863740807494794
+      Idle_Run_50: -6433894643166633384
+      Idle_Run_51: 451937352079366187
+      Idle_Run_52: -4490366920708504424
+      Idle_Run_53: 3212348171247280885
+      Idle_Run_54: 6301655170631068305
+      Idle_Run_55: -1278488084404816227
+      Idle_Run_56: 8049127296429006313
+      Idle_Run_57: 6026218600127665403
+      Idle_Run_58: -6887263341100960731
+      Idle_Run_59: -8344174754743643673
+      Idle_Run_6: 8123319184992881371
+      Idle_Run_60: 5205983675297266088
+      Idle_Run_61: 863792758820233461
+      Idle_Run_62: -5383278494226037729
+      Idle_Run_63: -4832405340146170523
+      Idle_Run_64: -4041155134788654757
+      Idle_Run_65: 3149117778319729
+      Idle_Run_66: 8909027264213440624
+      Idle_Run_67: -7968736691334802930
+      Idle_Run_68: -160924657609955751
+      Idle_Run_69: -3363945691105706011
+      Idle_Run_7: -5595543071594837157
+      Idle_Run_70: 34466855487202250
+      Idle_Run_71: 5773254073685706556
+      Idle_Run_8: -6239707025253194892
+      Idle_Run_9: 7804833484932801286
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

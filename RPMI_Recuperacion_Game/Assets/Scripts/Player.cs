@@ -14,9 +14,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
     private Animator animator;
-
     private SpriteRenderer spriteRenderer;
-
     public int extraJumpsValue = 1;
     private int extraJumps;
 
@@ -25,9 +23,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-
-
         extraJumps = extraJumpsValue;
     }
 
@@ -46,7 +41,7 @@ public class Player : MonoBehaviour
         if (isGrounded)
             extraJumps = extraJumpsValue;
 
-        // ✅ Salto corregido - wasPressedThisFrame en AMBOS casos
+        // Salto corregido
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             if (isGrounded || extraJumps > 0)
@@ -62,21 +57,30 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        // ✅ CORREGIDO: OverlapCircle devuelve Collider2D, no bool
+        Collider2D groundCollider = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = groundCollider != null;
     }
 
     private void SetAnimation(float moveInput)
     {
+        // ✅ FLIPEAR el sprite según la dirección
+        if (moveInput > 0)
+            spriteRenderer.flipX = false;  // Mirando a la derecha
+        else if (moveInput < 0)
+            spriteRenderer.flipX = true;   // Mirando a la izquierda
+
         if (isGrounded)
         {
             if (moveInput == 0)
                 animator.Play("Player_Idle");
             else
-                animator.Play("Player_Walk"); // ← también tenías "Player_Idle" aquí por error
+                animator.Play("Player_Walk");
         }
         else
         {
-            if (rb.linearVelocityY > 0)
+            // ✅ CORREGIDO: linearVelocity.y (no linearVelocityY)
+            if (rb.linearVelocity.y > 0)
                 animator.Play("Player_Jump");
             else
                 animator.Play("Player_Fall");
@@ -85,13 +89,16 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Damage")
+        // ✅ CORREGIDO: Usar CompareTag
+        if (collision.gameObject.CompareTag("Damage"))
         {
             health -= 25;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             StartCoroutine(BlinkRed());
 
-            if(health < 0)
+            Debug.Log("💔 Daño recibido. Salud: " + health);
+
+            if (health <= 0)
             {
                 Die();
             }
@@ -107,6 +114,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        Debug.Log("💀 ¡Muerto!");
         UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
     }
 }
