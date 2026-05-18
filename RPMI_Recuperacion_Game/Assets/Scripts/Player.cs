@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public Canvas youWinCanvas;
+    
     public int health = 100;
     public int coins;
     public float moveSpeed = 5f;
@@ -93,11 +93,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void WinGame()
-    {
-        youWinCanvas.gameObject.SetActive(true);  // Activa la pantalla
-        Time.timeScale = 0f;  // Pausa el juego (opcional)
-    }
+   
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -127,6 +123,6 @@ public class Player : MonoBehaviour
     private void Die()
     {
         Debug.Log("💀 ¡Muerto!");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 }

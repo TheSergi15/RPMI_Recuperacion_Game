@@ -1,109 +1,67 @@
 ﻿using System.Collections;
 using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class YouWinScreen : MonoBehaviour
 {
-    public CanvasGroup canvasGroup;  // Requiere CanvasGroup en el Canvas
-    public TextMeshProUGUI youWinText;       // El texto "YOU WIN!"
-    public Button restartButton;     // El botón Restart
+    [Header("Elementos del Canvas")]
+    public Image panelFondo;               // Panel negro de fondo
+    public TextMeshProUGUI youWinText;     // Texto "YOU WIN!"
+    public Button restartButton;           // Botón Restart
 
-    public float fadeInDuration = 0.8f;
-    public float scaleUpDuration = 0.6f;
-    public float buttonDelay = 1.2f;  // Cuándo aparece el botón
-    public float buttonBounceDuration = 0.5f;
+    [Header("Duración de animaciones")]
+    public float duracion = 0.8f;          // Duración de todas las animaciones
 
-    void Start()
+    void OnEnable()
     {
-        // Asegúrate de que todo empieza invisible/pequeño
-        canvasGroup.alpha = 0f;
+        // Resetear todo al estado inicial cuando se activa el Canvas
+        panelFondo.color = new Color(0, 0, 0, 0);
         youWinText.transform.localScale = Vector3.zero;
         restartButton.transform.localScale = Vector3.zero;
-        restartButton.interactable = false;  // Desactiva interacción hasta que aparezca
+        restartButton.interactable = false;
 
-        // Inicia la secuencia de animación
-        StartCoroutine(AnimateWinScreen());
+        // Lanzar todas las animaciones a la vez
+        StartCoroutine(AnimarTodo());
     }
 
-    IEnumerator AnimateWinScreen()
-    {
-        // ✅ FASE 1: Fade in del fondo
-        yield return StartCoroutine(FadeInBackground());
-
-        // ✅ FASE 2: Scale up del texto "YOU WIN!"
-        yield return StartCoroutine(ScaleUpText());
-
-        // ✅ FASE 3: Bounce del botón Restart
-        yield return new WaitForSeconds(buttonDelay);
-        yield return StartCoroutine(BounceButton());
-    }
-
-    IEnumerator FadeInBackground()
+    IEnumerator AnimarTodo()
     {
         float elapsed = 0f;
-        while (elapsed < fadeInDuration)
-        {
-            elapsed += Time.deltaTime;
-            canvasGroup.alpha = Mathf.Clamp01(elapsed / fadeInDuration);
-            yield return null;
-        }
-        canvasGroup.alpha = 1f;
-    }
 
-    IEnumerator ScaleUpText()
-    {
-        float elapsed = 0f;
-        while (elapsed < scaleUpDuration)
+        while (elapsed < duracion)
         {
-            elapsed += Time.deltaTime;
-            float progress = elapsed / scaleUpDuration;
-            // Easing: ease-out para un efecto suave
-            float easeProgress = 1f - Mathf.Pow(1f - progress, 3f);
-            youWinText.transform.localScale = Vector3.one * easeProgress;
+            elapsed += Time.unscaledDeltaTime; // ✅ unscaledDeltaTime para que funcione con TimeScale = 0
+            float progress = Mathf.Clamp01(elapsed / duracion);
+            float eased = 1f - Mathf.Pow(1f - progress, 3f); // Ease out cúbico
+
+            // Fondo negro: fade in
+            panelFondo.color = new Color(0, 0, 0, eased);
+
+            // Texto YOU WIN: scale up
+            youWinText.transform.localScale = Vector3.one * eased;
+
+            // Botón Restart: scale up con pequeño rebote
+            float bounceScale = progress < 0.8f
+               ? Mathf.Lerp(0f, 1.1f, progress / 0.8f)
+               : Mathf.Lerp(1.1f, 1f, (progress - 0.8f) / 0.2f);
+            restartButton.transform.localScale = Vector3.one * bounceScale;
+
             yield return null;
         }
+
+        // Asegurarse de que todo queda en estado final
+        panelFondo.color = new Color(0, 0, 0, 1);
         youWinText.transform.localScale = Vector3.one;
-    }
-
-    IEnumerator BounceButton()
-    {
-        // Primero escala desde 0 a 1.1 (overshot)
-        float elapsed = 0f;
-        while (elapsed < buttonBounceDuration)
-        {
-            elapsed += Time.deltaTime;
-            float progress = elapsed / buttonBounceDuration;
-            // Bounce easing
-            float scale = BounceEasing(progress);
-            restartButton.transform.localScale = Vector3.one * scale;
-            yield return null;
-        }
         restartButton.transform.localScale = Vector3.one;
-
-        // Ya es interactivo
-        restartButton.interactable = true;
+        restartButton.interactable = true; // Ya se puede pulsar el botón
     }
 
-    // ✅ Función easing para efecto de rebote
-    private float BounceEasing(float t)
-    {
-        if (t < 0.5f)
-        {
-            // Primera mitad: sube con un poco de overshoot
-            return Mathf.Lerp(0f, 1.15f, t * 2f);
-        }
-        else
-        {
-            // Segunda mitad: vuelve a 1
-            return Mathf.Lerp(1.15f, 1f, (t - 0.5f) * 2f);
-        }
-    }
-
-    // Llamar esto cuando presiones el botón Restart
+    // Asigna esto al onClick del botón Restart
     public void OnRestartClicked()
     {
-        SceneManager.LoadScene("GameScene");  // Cambia "GameScene" por tu escena
+        Time.timeScale = 1f;          // Reanuda el tiempo
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia la escena actual
     }
 }
