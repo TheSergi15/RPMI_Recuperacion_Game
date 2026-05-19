@@ -7,22 +7,41 @@ using TMPro;
 public class YouWinScreen : MonoBehaviour
 {
     [Header("Elementos del Canvas")]
-    public Image panelFondo;               // Panel negro de fondo
-    public TextMeshProUGUI youWinText;     // Texto "YOU WIN!"
-    public Button restartButton;           // Botón Restart
+    public Image panelFondo;
+    public TextMeshProUGUI youWinText;
+    public Button restartButton;
 
-    [Header("Duración de animaciones")]
-    public float duracion = 0.8f;          // Duración de todas las animaciones
+    [Header("Sonido")]
+    public AudioClip victoriaSound;        // Arrastra tu archivo de audio aquí
+    private AudioSource audioSource;
+
+    [Header("Colores")]
+    public Color colorFinal = new Color(0.18f, 0.8f, 0.44f, 1f);  // Verde por defecto
+    public Color colorInicial = Color.white;
+
+    [Header("Duración")]
+    public float duracion = 0.8f;
 
     void OnEnable()
     {
-        // Resetear todo al estado inicial cuando se activa el Canvas
+        // Resetear estado inicial
         panelFondo.color = new Color(0, 0, 0, 0);
         youWinText.transform.localScale = Vector3.zero;
+        youWinText.color = colorInicial;
         restartButton.transform.localScale = Vector3.zero;
         restartButton.interactable = false;
 
-        // Lanzar todas las animaciones a la vez
+        // Configurar AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        // Reproducir sonido de victoria
+        if (victoriaSound != null)
+            audioSource.PlayOneShot(victoriaSound);
+        else
+            Debug.LogWarning("⚠️ No hay AudioClip asignado en victoriaSound");
+
         StartCoroutine(AnimarTodo());
     }
 
@@ -32,36 +51,37 @@ public class YouWinScreen : MonoBehaviour
 
         while (elapsed < duracion)
         {
-            elapsed += Time.unscaledDeltaTime; // ✅ unscaledDeltaTime para que funcione con TimeScale = 0
+            elapsed += Time.unscaledDeltaTime;
             float progress = Mathf.Clamp01(elapsed / duracion);
             float eased = 1f - Mathf.Pow(1f - progress, 3f); // Ease out cúbico
 
             // Fondo negro: fade in
             panelFondo.color = new Color(0, 0, 0, eased);
 
-            // Texto YOU WIN: scale up
+            // Texto YOU WIN: scale up + cambio de color (blanco → verde)
             youWinText.transform.localScale = Vector3.one * eased;
+            youWinText.color = Color.Lerp(colorInicial, colorFinal, eased);
 
-            // Botón Restart: scale up con pequeño rebote
+            // Botón Restart: scale up con rebote
             float bounceScale = progress < 0.8f
-               ? Mathf.Lerp(0f, 1.1f, progress / 0.8f)
-               : Mathf.Lerp(1.1f, 1f, (progress - 0.8f) / 0.2f);
+                ? Mathf.Lerp(0f, 1.1f, progress / 0.8f)
+                : Mathf.Lerp(1.1f, 1f, (progress - 0.8f) / 0.2f);
             restartButton.transform.localScale = Vector3.one * bounceScale;
 
             yield return null;
         }
 
-        // Asegurarse de que todo queda en estado final
-        panelFondo.color = new Color(0, 0, 0, 1);
+        // Estado final
+        panelFondo.color = new Color(0, 0, 0, 1f);
         youWinText.transform.localScale = Vector3.one;
+        youWinText.color = colorFinal;
         restartButton.transform.localScale = Vector3.one;
-        restartButton.interactable = true; // Ya se puede pulsar el botón
+        restartButton.interactable = true;
     }
 
-    // Asigna esto al onClick del botón Restart
     public void OnRestartClicked()
     {
-        Time.timeScale = 1f;          // Reanuda el tiempo
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia la escena actual
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
