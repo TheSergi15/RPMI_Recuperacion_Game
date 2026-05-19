@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    
     public int health = 100;
     public int coins;
     public float moveSpeed = 5f;
@@ -15,6 +14,13 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;
     public Image healthImage;
 
+    [Header("Sonidos")]
+    public AudioClip jumpSound;
+    public AudioClip hurtSound;
+    public AudioClip runSound;
+    public AudioClip fallSound; // 🔊 Nuevo
+
+    private AudioSource audioSource;
     private Rigidbody2D rb;
     private bool isGrounded;
     private Animator animator;
@@ -22,17 +28,20 @@ public class Player : MonoBehaviour
     public int extraJumpsValue = 1;
     private int extraJumps;
 
+    private bool isPlayingRunSound = false;
+    private bool isFalling = false; // Para no repetir el sonido en bucle
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         extraJumps = extraJumpsValue;
     }
 
     void Update()
     {
-        // Movimiento horizontal
         float moveInput = 0f;
         if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
             moveInput = 1f;
@@ -41,43 +50,76 @@ public class Player : MonoBehaviour
 
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
-        // Resetear saltos extra al tocar el suelo
         if (isGrounded)
+        {
             extraJumps = extraJumpsValue;
+            isFalling = false; // Resetear al tocar suelo
+        }
 
-        // Salto corregido
+        // 🔊 Sonido de salto
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             if (isGrounded || extraJumps > 0)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                PlaySound(jumpSound);
+
                 if (!isGrounded)
                     extraJumps--;
             }
         }
 
-        SetAnimation(moveInput);
+       
 
+        HandleRunSound(moveInput);
+        SetAnimation(moveInput);
         healthImage.fillAmount = health / 100f;
+    }
+
+    private void HandleRunSound(float moveInput)
+    {
+        bool shouldRun = isGrounded && moveInput != 0f;
+
+        if (shouldRun && !isPlayingRunSound)
+        {
+            if (runSound != null)
+            {
+                audioSource.clip = runSound;
+                audioSource.loop = true;
+                audioSource.Play();
+                isPlayingRunSound = true;
+            }
+        }
+        else if (!shouldRun && isPlayingRunSound)
+        {
+            audioSource.Stop();
+            audioSource.loop = false;
+            isPlayingRunSound = false;
+        }
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+            audioSource.PlayOneShot(clip);
     }
 
     private void FixedUpdate()
     {
-        // ✅ CORREGIDO: OverlapCircle devuelve Collider2D, no bool
         Collider2D groundCollider = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         isGrounded = groundCollider != null;
     }
 
     private void SetAnimation(float moveInput)
     {
-        // ✅ FLIPEAR el sprite según la dirección
         if (moveInput > 0)
-            spriteRenderer.flipX = false;  // Mirando a la derecha
+            spriteRenderer.flipX = false;
         else if (moveInput < 0)
-            spriteRenderer.flipX = true;   // Mirando a la izquierda
+            spriteRenderer.flipX = true;
 
         if (isGrounded)
         {
+            isFalling = false; // Resetear al tocar suelo
             if (moveInput == 0)
                 animator.Play("Player_Idle");
             else
@@ -85,31 +127,36 @@ public class Player : MonoBehaviour
         }
         else
         {
-            // ✅ CORREGIDO: linearVelocity.y (no linearVelocityY)
             if (rb.linearVelocity.y > 0)
+            {
+                isFalling = false; // Mientras sube no está cayendo
                 animator.Play("Player_Jump");
+            }
             else
+            {
+                // 🔊 Solo suena al ENTRAR en la animación de fall, no cada frame
+                if (!isFalling)
+                {
+                    PlaySound(fallSound);
+                    isFalling = true;
+                }
                 animator.Play("Player_Fall");
+            }
         }
     }
 
-   
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // ✅ CORREGIDO: Usar CompareTag
         if (collision.gameObject.CompareTag("Damage"))
         {
             health -= 25;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            PlaySound(hurtSound);
             StartCoroutine(BlinkRed());
-
             Debug.Log("💔 Daño recibido. Salud: " + health);
 
             if (health <= 0)
-            {
                 Die();
-            }
         }
     }
 
@@ -123,6 +170,7 @@ public class Player : MonoBehaviour
     private void Die()
     {
         Debug.Log("💀 ¡Muerto!");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 }
