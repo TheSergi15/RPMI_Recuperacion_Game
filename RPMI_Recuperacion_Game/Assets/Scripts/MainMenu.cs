@@ -20,19 +20,19 @@ public class MainMenu : MonoBehaviour
     public GameObject creditsPanel;
 
     [Header("Botones de retorno")]
-    public Button backOptionsButton;   // Botón "Volver" dentro de Options
-    public Button backCreditsButton;   // Botón "Volver" dentro de Credits
+    public Button backOptionsButton;
+    public Button backCreditsButton;
 
     [Header("Opciones - Sliders")]
     public Slider musicSlider;
     public Slider sfxSlider;
 
     [Header("Audio")]
-    public AudioClip musicaFondo;
+    
     public AudioClip sonidoBoton;
     public AudioClip sonidoPlay;
-    private AudioSource musicSource;
-    private AudioSource sfxSource;
+    
+   
 
     [Header("Colores")]
     public Color colorTextoNormal = Color.white;
@@ -56,17 +56,23 @@ public class MainMenu : MonoBehaviour
     private bool optionsOpen = false;
     private bool creditsOpen = false;
 
+    // ✅ Guardamos los scales originales de cada elemento
+    private Vector3 titleScale;
+    private Vector3 playScale;
+    private Vector3 optionsScale;
+    private Vector3 creditsScale;
+    private Vector3 exitScale;
+
     void Start()
     {
-        // Configurar AudioSources
-        musicSource = gameObject.AddComponent<AudioSource>();
-        sfxSource = gameObject.AddComponent<AudioSource>();
-        musicSource.loop = true;
-        musicSource.volume = 0.5f;
-        sfxSource.volume = 1f;
+       
 
-        if (musicaFondo != null)
-            musicSource.PlayOneShot(musicaFondo);
+        // ✅ Guardar scales originales ANTES de ponerlos a cero
+        titleScale = titleText.transform.localScale;
+        playScale = playButton.transform.localScale;
+        optionsScale = optionsButton.transform.localScale;
+        creditsScale = creditsButton.transform.localScale;
+        exitScale = exitButton.transform.localScale;
 
         // Iniciar todo invisible
         titleText.transform.localScale = Vector3.zero;
@@ -85,7 +91,7 @@ public class MainMenu : MonoBehaviour
         if (optionsPanel != null) optionsPanel.SetActive(false);
         if (creditsPanel != null) creditsPanel.SetActive(false);
 
-        // Conectar botones de retorno automáticamente
+        // Conectar botones de retorno
         if (backOptionsButton != null)
             backOptionsButton.onClick.AddListener(OnBackOptionsClicked);
         if (backCreditsButton != null)
@@ -112,17 +118,17 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator AnimarEntrada()
     {
-        yield return StartCoroutine(ScaleUp(titleText.transform, duracionEntrada));
-        yield return StartCoroutine(ScaleUpConBounce(playButton.transform));
+        yield return StartCoroutine(ScaleUp(titleText.transform, duracionEntrada, titleScale));
+        yield return StartCoroutine(ScaleUpConBounce(playButton.transform, playScale));
         yield return new WaitForSeconds(delayEntrebotones);
-        yield return StartCoroutine(ScaleUpConBounce(optionsButton.transform));
+        yield return StartCoroutine(ScaleUpConBounce(optionsButton.transform, optionsScale));
         yield return new WaitForSeconds(delayEntrebotones);
-        yield return StartCoroutine(ScaleUpConBounce(creditsButton.transform));
+        yield return StartCoroutine(ScaleUpConBounce(creditsButton.transform, creditsScale));
         yield return new WaitForSeconds(delayEntrebotones);
-        yield return StartCoroutine(ScaleUpConBounce(exitButton.transform));
+        yield return StartCoroutine(ScaleUpConBounce(exitButton.transform, exitScale));
     }
 
-    IEnumerator ScaleUp(Transform target, float duracion)
+    IEnumerator ScaleUp(Transform target, float duracion, Vector3 scaleDestino)
     {
         float elapsed = 0f;
         while (elapsed < duracion)
@@ -130,13 +136,13 @@ public class MainMenu : MonoBehaviour
             elapsed += Time.deltaTime;
             float progress = Mathf.Clamp01(elapsed / duracion);
             float eased = 1f - Mathf.Pow(1f - progress, 3f);
-            target.localScale = Vector3.one * eased;
+            target.localScale = scaleDestino * eased;  // ✅ Anima hasta el scale original
             yield return null;
         }
-        target.localScale = Vector3.one;
+        target.localScale = scaleDestino;  // ✅ Termina en el scale correcto
     }
 
-    IEnumerator ScaleUpConBounce(Transform target)
+    IEnumerator ScaleUpConBounce(Transform target, Vector3 scaleDestino)
     {
         float duracion = 0.4f;
         float elapsed = 0f;
@@ -147,10 +153,10 @@ public class MainMenu : MonoBehaviour
             float scale = progress < 0.7f
                 ? Mathf.Lerp(0f, 1.1f, progress / 0.7f)
                 : Mathf.Lerp(1.1f, 1f, (progress - 0.7f) / 0.3f);
-            target.localScale = Vector3.one * scale;
+            target.localScale = scaleDestino * scale;  // ✅ Anima hasta el scale original
             yield return null;
         }
-        target.localScale = Vector3.one;
+        target.localScale = scaleDestino;  // ✅ Termina en el scale correcto
     }
 
     IEnumerator AnimarColorTitulo()
@@ -228,8 +234,6 @@ public class MainMenu : MonoBehaviour
         PlaySFX(sonidoBoton);
         optionsOpen = !optionsOpen;
         if (optionsPanel != null) optionsPanel.SetActive(optionsOpen);
-
-        // Cierra créditos si está abierto
         if (creditsOpen)
         {
             creditsOpen = false;
@@ -242,8 +246,6 @@ public class MainMenu : MonoBehaviour
         PlaySFX(sonidoBoton);
         creditsOpen = !creditsOpen;
         if (creditsPanel != null) creditsPanel.SetActive(creditsOpen);
-
-        // Cierra opciones si está abierto
         if (optionsOpen)
         {
             optionsOpen = false;
@@ -266,7 +268,6 @@ public class MainMenu : MonoBehaviour
 
     // ==================== BOTONES DE RETORNO ====================
 
-    // ✅ Cierra el panel de Options y vuelve al menú
     public void OnBackOptionsClicked()
     {
         PlaySFX(sonidoBoton);
@@ -274,7 +275,6 @@ public class MainMenu : MonoBehaviour
         if (optionsPanel != null) optionsPanel.SetActive(false);
     }
 
-    // ✅ Cierra el panel de Credits y vuelve al menú
     public void OnBackCreditsClicked()
     {
         PlaySFX(sonidoBoton);
@@ -286,18 +286,19 @@ public class MainMenu : MonoBehaviour
 
     public void OnMusicVolumeChanged(float value)
     {
-        musicSource.volume = value;
+        if (MusicManager.instance != null)
+            MusicManager.instance.SetMusicVolume(value);
     }
 
     public void OnSfxVolumeChanged(float value)
     {
-        sfxSource.volume = value;
+        if (MusicManager.instance != null)
+            MusicManager.instance.SetSfxVolume(value);
     }
 
     void PlaySFX(AudioClip clip)
     {
-        if (clip != null)
-            sfxSource.PlayOneShot(clip);
+        if (MusicManager.instance != null)
+            MusicManager.instance.PlaySFX(clip);
     }
 }
-

@@ -2,20 +2,50 @@
 
 public class Coin : MonoBehaviour
 {
+    public enum CoinType { Bronze, Silver, Gold }
+
+    [Header("Tipo de moneda")]
+    public CoinType coinType = CoinType.Bronze;
+
+    [Header("Animación")]
+    public float rotateSpeed = 90f;
+    public float bobSpeed = 2f;
+    public float bobHeight = 0.2f;
+
     [Header("Sonido")]
-    public AudioClip coinSound;
-
+    public AudioClip coinSound;          // ✅ Arrastra tu audio aquí
     [Range(0.1f, 5f)]
-    public float soundDuration = 0.3f; // ⬅️ Ajusta cuántos segundos suena
+    public float soundDuration = 0.3f;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private int coinValue;
+    private Vector3 startPosition;
+
+    void Start()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        startPosition = transform.position;
+        switch (coinType)
         {
-            Player player = collision.gameObject.GetComponent<Player>();
-            player.coins += 1;
+            case CoinType.Bronze: coinValue = 1; break;
+            case CoinType.Silver: coinValue = 5; break;
+            case CoinType.Gold: coinValue = 10; break;
+        }
+    }
 
-            // 🔊 Reproducir sonido cortado
+    void Update()
+    {
+        transform.Rotate(0f, rotateSpeed * Time.deltaTime, 0f);
+        float newY = startPosition.y + Mathf.Sin(Time.time * bobSpeed) * bobHeight;
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (CoinManager.instance != null)
+                CoinManager.instance.AddCoins(coinValue);
+
+            // ✅ Reproducir sonido antes de destruir
             PlayClipTrimmed(coinSound, transform.position, soundDuration);
 
             Destroy(gameObject);
@@ -25,16 +55,11 @@ public class Coin : MonoBehaviour
     private void PlayClipTrimmed(AudioClip clip, Vector3 position, float duration)
     {
         if (clip == null) return;
-
-        // Crear objeto temporal
         GameObject tempAudio = new GameObject("CoinSound");
         tempAudio.transform.position = position;
-
         AudioSource source = tempAudio.AddComponent<AudioSource>();
         source.clip = clip;
         source.Play();
-
-        // Destruirlo después de 'duration' segundos
-        Destroy(tempAudio, duration);
+        Destroy(tempAudio, duration);  // ✅ Se destruye tras 'duration' segundos
     }
 }

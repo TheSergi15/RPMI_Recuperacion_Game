@@ -128,6 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72221dbb14cca6143ad97660c3f82bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
+  coinType: 2
+  rotateSpeed: 90
+  bobSpeed: 4
+  bobHeight: 0.5
   coinSound: {fileID: 8300000, guid: 942159ae00cc158498e012bbb9d06609, type: 3}
   soundDuration: 1
 --- !u!61 &2944648719554489974
