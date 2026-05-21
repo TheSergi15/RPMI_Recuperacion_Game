@@ -9595,6 +9595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NextLevel
   nextLevelName: Level3
+  thisLevelNumber: 0
 --- !u!1 &1442080784
 GameObject:
   m_ObjectHideFlags: 0
@@ -10774,6 +10775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   YouWinScreen: {fileID: 583225968}
+  thisLevelNumber: 2
 --- !u!1 &1638475968
 GameObject:
   m_ObjectHideFlags: 0

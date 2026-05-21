@@ -158,6 +158,10 @@ public class Player : MonoBehaviour
             if (health <= 0)
                 Die();
         }
+        else if (collision.gameObject.tag == "BouncePad")
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * 2);
+        }
     }
 
     private IEnumerator BlinkRed()

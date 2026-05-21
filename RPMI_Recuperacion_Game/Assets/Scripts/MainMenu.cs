@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour
     };
 
     [Header("Configuración")]
-    public string gameSceneName = "GameScene";
+    public string gameSceneName = "LevelSelector";
     public float duracionEntrada = 1f;
     public float delayEntrebotones = 0.15f;
     public float velocidadColorTitulo = 1.5f;

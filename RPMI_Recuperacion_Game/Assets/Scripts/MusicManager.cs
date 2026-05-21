@@ -10,9 +10,10 @@ public class MusicManager : MonoBehaviour
     public AudioSource sfxSource;
 
     [Header("Música por escena")]
-    public AudioClip menuMusic;      // Música del menú principal
-    public AudioClip gameMusic;      // Música del juego
-    public AudioClip bossMusic;      // Música de jefe (opcional)
+    public AudioClip menuMusic;
+    public AudioClip levelSelectorMusic; // ⬅️ Nuevo
+    public AudioClip gameMusic;
+    public AudioClip bossMusic;
 
     [Header("Volumen inicial")]
     [Range(0f, 1f)] public float musicVolume = 0.5f;
@@ -20,34 +21,28 @@ public class MusicManager : MonoBehaviour
 
     void Awake()
     {
-        // ✅ Singleton: solo existe un MusicManager en toda la partida
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);  // ✅ No se destruye al cambiar de escena
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject);  // Si ya existe uno, destruye el duplicado
+            Destroy(gameObject);
             return;
         }
 
-        // Cargar volumen guardado (si existe)
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
         sfxVolume = PlayerPrefs.GetFloat("SfxVolume", 1f);
 
-        // Aplicar volumen
         if (musicSource != null) musicSource.volume = musicVolume;
         if (sfxSource != null) sfxSource.volume = sfxVolume;
     }
 
     void Start()
     {
-        // Reproducir música según la escena actual
         PlayMusicForCurrentScene();
     }
-
-    // ==================== MÚSICA POR ESCENA ====================
 
     public void PlayMusicForCurrentScene()
     {
@@ -58,11 +53,14 @@ public class MusicManager : MonoBehaviour
             case "MainMenu":
                 PlayMusic(menuMusic);
                 break;
+            case "LevelSelector":
+                PlayMusic(levelSelectorMusic); // ⬅️ Nuevo
+                break;
             case "GameScene":
                 PlayMusic(gameMusic);
                 break;
             default:
-                PlayMusic(gameMusic);  // Por defecto usa la música del juego
+                PlayMusic(gameMusic);
                 break;
         }
     }
@@ -70,8 +68,6 @@ public class MusicManager : MonoBehaviour
     public void PlayMusic(AudioClip clip)
     {
         if (clip == null || musicSource == null) return;
-
-        // Evita reiniciar si ya está sonando la misma canción
         if (musicSource.clip == clip && musicSource.isPlaying) return;
 
         musicSource.clip = clip;
@@ -79,41 +75,29 @@ public class MusicManager : MonoBehaviour
         musicSource.Play();
     }
 
-    // ==================== EFECTOS DE SONIDO ====================
-
     public void PlaySFX(AudioClip clip)
     {
         if (clip == null || sfxSource == null) return;
         sfxSource.PlayOneShot(clip);
     }
 
-    // ==================== VOLUMEN ====================
-
-    // ✅ Llama esto desde el slider de música del PauseMenu
     public void SetMusicVolume(float value)
     {
         musicVolume = value;
         if (musicSource != null)
             musicSource.volume = value;
-
-        // Guardar preferencia
         PlayerPrefs.SetFloat("MusicVolume", value);
         PlayerPrefs.Save();
     }
 
-    // ✅ Llama esto desde el slider de sfx del PauseMenu
     public void SetSfxVolume(float value)
     {
         sfxVolume = value;
         if (sfxSource != null)
             sfxSource.volume = value;
-
-        // Guardar preferencia
         PlayerPrefs.SetFloat("SfxVolume", value);
         PlayerPrefs.Save();
     }
-
-    // ==================== UTILIDADES ====================
 
     public void StopMusic()
     {
@@ -132,19 +116,17 @@ public class MusicManager : MonoBehaviour
         if (musicSource != null)
             musicSource.UnPause();
     }
+
     void OnEnable()
     {
-        // ✅ Suscribirse al evento de cambio de escena
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnDisable()
     {
-        // ✅ Desuscribirse para evitar errores
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // ✅ Se llama automáticamente cada vez que carga una escena nueva
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
     {
         PlayMusicForCurrentScene();
