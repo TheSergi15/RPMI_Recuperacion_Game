@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Damage
   - BouncePad
+  - Orange
+  - Strawberry
   layers:
   - Default
   - TransparentFX

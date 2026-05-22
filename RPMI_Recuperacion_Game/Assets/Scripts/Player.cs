@@ -14,11 +14,16 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;
     public Image healthImage;
 
+    [Header("Coyote Time")]
+    public float coyoteTime = 0.15f;
+    private float coyoteTimeCounter;
+
     [Header("Sonidos")]
     public AudioClip jumpSound;
     public AudioClip hurtSound;
     public AudioClip runSound;
-    public AudioClip fallSound; // 🔊 Nuevo
+    public AudioClip fallSound;
+    public AudioClip powerupSound; // ⬅️ Nuevo
 
     private AudioSource audioSource;
     private Rigidbody2D rb;
@@ -29,7 +34,7 @@ public class Player : MonoBehaviour
     private int extraJumps;
 
     private bool isPlayingRunSound = false;
-    private bool isFalling = false; // Para no repetir el sonido en bucle
+    private bool isFalling = false;
 
     void Start()
     {
@@ -52,24 +57,30 @@ public class Player : MonoBehaviour
 
         if (isGrounded)
         {
+            coyoteTimeCounter = coyoteTime;
             extraJumps = extraJumpsValue;
-            isFalling = false; // Resetear al tocar suelo
+            isFalling = false;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
         }
 
-        // 🔊 Sonido de salto
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            if (isGrounded || extraJumps > 0)
+            if (coyoteTimeCounter > 0f)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
                 PlaySound(jumpSound);
-
-                if (!isGrounded)
-                    extraJumps--;
+                coyoteTimeCounter = 0f;
+            }
+            else if (extraJumps > 0)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                PlaySound(jumpSound);
+                extraJumps--;
             }
         }
-
-       
 
         HandleRunSound(moveInput);
         SetAnimation(moveInput);
@@ -119,7 +130,7 @@ public class Player : MonoBehaviour
 
         if (isGrounded)
         {
-            isFalling = false; // Resetear al tocar suelo
+            isFalling = false;
             if (moveInput == 0)
                 animator.Play("Player_Idle");
             else
@@ -129,12 +140,11 @@ public class Player : MonoBehaviour
         {
             if (rb.linearVelocity.y > 0)
             {
-                isFalling = false; // Mientras sube no está cayendo
+                isFalling = false;
                 animator.Play("Player_Jump");
             }
             else
             {
-                // 🔊 Solo suena al ENTRAR en la animación de fall, no cada frame
                 if (!isFalling)
                 {
                     PlaySound(fallSound);
@@ -176,5 +186,15 @@ public class Player : MonoBehaviour
         Debug.Log("💀 ¡Muerto!");
         UnityEngine.SceneManagement.SceneManager.LoadScene(
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Strawberry")
+        {
+            extraJumps = 2;
+            PlaySound(powerupSound); // 🔊 Sonido powerup
+            Destroy(collision.gameObject);
+        }
     }
 }

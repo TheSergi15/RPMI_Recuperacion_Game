@@ -19,21 +19,25 @@ public class LevelNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     [Header("Animación hover")]
     public float hoverScale = 1.15f;
 
+    [Header("Sonidos")]
+    public AudioClip hoverSound;
+    public AudioClip clickSound;
+    public AudioClip lockedSound;
+
     private Vector3 originalScale;
     private int levelNumber;
     private bool isUnlocked;
-    private bool wasUnlocked = false; // Para detectar si acaba de desbloquearse
+    private bool wasUnlocked = false;
 
     void Start()
     {
         StartCoroutine(CaptureScaleDelayed());
-
     }
-    private System.Collections.IEnumerator CaptureScaleDelayed()
+
+    private IEnumerator CaptureScaleDelayed()
     {
-        //Espera hasta que el scale sea mayor que cero
         yield return new WaitUntil(() => transform.localScale.x > 0.9f);
-        originalScale = transform.localScale;       
+        originalScale = transform.localScale;
     }
 
     public void SetState(bool unlocked, int number)
@@ -42,28 +46,23 @@ public class LevelNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         levelNumber = number;
         isUnlocked = unlocked;
 
-        // Número del nivel
         if (levelNumberText != null)
             levelNumberText.text = number.ToString();
 
-        // Candado
         if (lockText != null)
             lockText.text = unlocked ? "" : "🔒";
 
-        // Color del nodo
         if (nodeImage != null)
             nodeImage.color = unlocked ? colorDesbloqueado : colorBloqueado;
 
-        // Botón
         if (button != null)
         {
-            button.interactable = unlocked;
+            button.interactable = true; // ✅ Siempre interactuable
+            button.transition = Selectable.Transition.None; // ✅ Sin transiciones de color
             button.onClick.RemoveAllListeners();
-            if (unlocked)
-                button.onClick.AddListener(OnNodeClicked);
+            button.onClick.AddListener(OnNodeClicked); // ✅ Siempre conectado
         }
 
-        // 🎉 Animación de desbloqueo si acaba de desbloquearse
         if (justUnlocked)
             StartCoroutine(UnlockAnimation());
 
@@ -72,8 +71,16 @@ public class LevelNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     void OnNodeClicked()
     {
-        if (!isUnlocked) return;
-        StartCoroutine(ClickAnimation());
+        if (isUnlocked) // ✅ Corregido (estaba invertido)
+        {
+            MusicManager.instance?.PlaySFX(clickSound);
+            StartCoroutine(ClickAnimation());
+        }
+        else
+        {
+            MusicManager.instance?.PlaySFX(lockedSound);
+            StartCoroutine(LockedAnimation());
+        }
     }
 
     // ==================== ANIMACIONES ====================
@@ -99,22 +106,34 @@ public class LevelNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private IEnumerator UnlockAnimation()
     {
-        // Espera un frame para que todo esté inicializado
         yield return null;
 
-        // 3 bounces al desbloquearse
         for (int i = 0; i < 3; i++)
         {
             yield return StartCoroutine(ScaleTo(originalScale * 1.2f, 0.12f));
             yield return StartCoroutine(ScaleTo(originalScale, 0.12f));
         }
 
-        // Flash de color blanco
         if (nodeImage != null)
         {
             nodeImage.color = Color.white;
             yield return new WaitForSeconds(0.1f);
             nodeImage.color = colorDesbloqueado;
+        }
+    }
+
+    private IEnumerator LockedAnimation()
+    {
+        float duracion = 0.4f;
+        float elapsed = 0f;
+        float intensidad = 10f;
+
+        while (elapsed < duracion)
+        {
+            elapsed += Time.deltaTime;
+            float x = Mathf.Sin(elapsed * 40f) * intensidad * (1f - elapsed / duracion);
+            transform.localPosition += new Vector3(x * Time.deltaTime, 0, 0);
+            yield return null;
         }
     }
 
@@ -139,6 +158,7 @@ public class LevelNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!isUnlocked) return;
+        MusicManager.instance?.PlaySFX(hoverSound);
         StartCoroutine(ScaleTo(originalScale * hoverScale));
     }
 

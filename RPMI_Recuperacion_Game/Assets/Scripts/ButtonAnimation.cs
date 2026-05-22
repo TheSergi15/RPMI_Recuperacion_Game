@@ -6,11 +6,11 @@ using TMPro;
 public class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [Header("Hover")]
-    public float hoverScale = 1.15f;        // Tamaño al pasar el ratón
+    public float hoverScale = 1.15f;
     public float hoverSpeed = 8f;
 
     [Header("Click")]
-    public float clickScale = 0.85f;        // Tamaño al hacer click
+    public float clickScale = 0.85f;
     public float clickDuration = 0.1f;
 
     [Header("Wave")]
@@ -23,6 +23,10 @@ public class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public Color normalColor = Color.white;
     public Color hoverColor = Color.yellow;
     public float colorSpeed = 8f;
+
+    [Header("Sonidos")]
+    public AudioClip hoverSound;
+    public AudioClip clickSound;
 
     private RectTransform rectTransform;
     private TextMeshProUGUI tmp;
@@ -39,10 +43,10 @@ public class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExit
         originalScale = rectTransform.localScale;
     }
 
-    // 🖱️ Ratón encima
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovered = true;
+        MusicManager.instance?.PlaySFX(hoverSound); // 🔊 Sonido hover
 
         if (scaleCoroutine != null) StopCoroutine(scaleCoroutine);
         scaleCoroutine = StartCoroutine(ScaleTo(originalScale * hoverScale));
@@ -51,7 +55,6 @@ public class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExit
             waveCoroutine = StartCoroutine(WaveText());
     }
 
-    // 🖱️ Ratón sale
     public void OnPointerExit(PointerEventData eventData)
     {
         isHovered = false;
@@ -66,26 +69,23 @@ public class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExit
             ResetTextVertices();
         }
 
-        // Volver al color normal
         if (tmp != null) tmp.color = normalColor;
     }
 
-    // 🖱️ Click
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!isAnimatingClick)
+        {
+            MusicManager.instance?.PlaySFX(clickSound); // 🔊 Sonido click
             StartCoroutine(ClickAnimation());
+        }
     }
 
     private IEnumerator ClickAnimation()
     {
         isAnimatingClick = true;
-
-        // Encoge
         yield return StartCoroutine(ScaleTo(originalScale * clickScale, clickDuration));
-        // Vuelve al tamaño hover
         yield return StartCoroutine(ScaleTo(originalScale * hoverScale, clickDuration));
-
         isAnimatingClick = false;
     }
 
@@ -107,7 +107,6 @@ public class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExit
         rectTransform.localScale = targetScale;
     }
 
-    // 🌊 Wave en el texto del botón
     private IEnumerator WaveText()
     {
         while (isHovered)
@@ -117,7 +116,6 @@ public class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExit
             tmp.ForceMeshUpdate();
             TMP_TextInfo textInfo = tmp.textInfo;
 
-            // Color hover
             float colorT = (Mathf.Sin(Time.unscaledTime * colorSpeed) + 1f) / 2f;
             tmp.color = Color.Lerp(normalColor, hoverColor, colorT);
 
@@ -146,7 +144,6 @@ public class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExit
         }
     }
 
-    // Resetear vértices al quitar el hover
     private void ResetTextVertices()
     {
         if (tmp == null) return;
