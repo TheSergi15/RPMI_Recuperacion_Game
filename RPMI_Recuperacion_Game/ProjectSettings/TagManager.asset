@@ -8,6 +8,7 @@ TagManager:
   - BouncePad
   - Orange
   - Strawberry
+  - SlipperyGround
   layers:
   - Default
   - TransparentFX
