@@ -23,14 +23,19 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        // Conectar botón de volver
+        // ✅ Solo resetea si es la primera vez que se ejecuta el juego
+        if (PlayerPrefs.GetInt("GameInitialized", 0) == 0)
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.SetInt("GameInitialized", 1);
+            PlayerPrefs.Save();
+        }
+
         if (backButton != null)
             backButton.onClick.AddListener(GoToMainMenu);
 
-        // Actualizar estado de todos los nodos
         RefreshNodes();
     }
-
     public void RefreshNodes()
     {
         for (int i = 0; i < levelNodes.Length; i++)
